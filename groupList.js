@@ -15,7 +15,6 @@ var mulitiplyList = function(o){
 					$.each(items, function(i, item){
 						ulContent.push('<li groupId="' + item.id + '"><a class="l' + item.level + '" href="javascript:;">' + item.name + '</a></li>');
 					});
-					
 					f.ui(ulContent.join(""));
 				}else{
 					var li = '<li class="none">您还没有企业通讯录</li>';
@@ -50,6 +49,5 @@ var mulitiplyList = function(o){
 			return itemsNew;
 		}
 	};
-	
 	f.data();
 };
