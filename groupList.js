@@ -2,7 +2,7 @@
 * 多级组
 */
 var mulitiplyList = function(o){
-  var f = {
+	var f = {
 		data: function(){
 			var request = $.ajax({
 				url:'/json.js',
@@ -21,14 +21,11 @@ var mulitiplyList = function(o){
 					f.ui(li);
 				}
 			});
-
 			request.fail(function(jqXHR, textStatus) {
 				if(console && console.log){
 					 console.log( "Request failed: " + textStatus );
-				}
-			 
-			});
-			
+				}	 
+			});	
 		},
 		ui:function(content){
 			o.html('<ul>'+ content +'</ul>');
