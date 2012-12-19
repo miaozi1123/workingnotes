@@ -5,7 +5,7 @@ var mulitiplyList = function(o){
 	var f = {
 		data: function(){
 			var request = $.ajax({
-				url:'/json.js',
+				url:'/jsonList.js',
 				dataType: 'script',
 				cache: 'false',
 			});
