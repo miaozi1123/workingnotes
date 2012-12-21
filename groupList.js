@@ -73,7 +73,7 @@ var mulitiplyList = function(o,u){
 			p.ui(ulContent.join(""));
 		}
 		else {
-			var li = '<li class="none">您还没有企业通讯录</li>';
+			var li = '<li class="none">您还没有添加组</li>';
 			p.ui(li);
 		}
 	}
