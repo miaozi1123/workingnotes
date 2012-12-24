@@ -16,7 +16,7 @@ var mulitiplyList = function(o,tag){
 			var items = p.reorganization(eval(data).items),ulContent = [];
 			if (items.length > 0) {
 				$.each(items, function(i, item){
-					ulContent.push('<li groupId="' + item.id + '"><a class="l' + item.level + '" href="javascript:;">' + item.name + '</a></li>');
+					ulContent.push('<li groupId="' + item.id + '" title="'+item.name+'"><a class="l' + item.level + '" href="javascript:;">' + p.cut(item.name,14) + '</a></li>');
 				});
 				
 				p.ui(ulContent.join(""));
@@ -45,6 +45,35 @@ var mulitiplyList = function(o,tag){
 				itemsNew.push(ele);
 			}
 			return itemsNew;
+		},
+		cut: function(value,l){
+			var cutValue = value;			
+			if(p.byteLength(value) > l){
+				if(p.isContainNoAsscii){
+					cutValue = cutValue.slice(0,l/2) + "...";
+				}else{
+					cutValue = cutValue.slice(0,l) + "...";
+				}
+				return cutValue;
+			}
+			else{
+				return value;
+			}
+		},
+		byteLength: function(value){
+			var length = value.length; 
+			for(var i = 0; i < value.length; i++){
+			     if(value.charCodeAt(i) > 127){       
+			        length = length + 1;
+			     }       
+			 }
+			 return length;
+		},
+		isContainNoAsscii : function(value){
+			var length = value.length;
+			/*计算字符串实际长度，一个中文算2个字符*/
+			var byteLengths = p.byteLength(value);
+			return byteLengths > length;
 		}
 	};
 	var inherit = function(p){
@@ -63,12 +92,13 @@ var mulitiplyList = function(o,tag){
 	var m = inherit(p);
 	m.requestDone = function(data){
 		var items = p.reorganization(eval(data).items), ulContent = [];
+		
 		if (items.length > 0) {
 			$.each(items, function(i, item){
 				ulContent.push('<li groupId="' + item.id + '"><div class="list_control">');
 				ulContent.push('<a class="list_btn_style icon_list_edit boxy_external" title="重命名" href="javascript:;"></a>');
 				ulContent.push('<a href="javascript:;" class="list_btn_style icon_list_del" title="删除"></a></div>');
-				ulContent.push('<span class="cut_groupName">' + item.name + '</span></li>');
+				ulContent.push('<span title="'+ item.name +'">' + m.cut(item.name,12) + '</span></li>');
 			});
 			p.ui(ulContent.join(""));
 		}
