@@ -1,11 +1,11 @@
 /* by miaoxiuhong 2012-12-17
 * 多级组
 */
-var mulitiplyList = function(o,u){
+var mulitiplyList = function(o,tag){
 	var p = {
 		data: function(){
 			var request = $.ajax({
-				url: u,
+				url: '/js/concats/json.js',
 				dataType: 'script',
 				cache: 'false',
 			});
@@ -77,6 +77,20 @@ var mulitiplyList = function(o,u){
 			p.ui(li);
 		}
 	}
-	p.data();
-	m.data();
+	m.data = function(){
+		var request = $.ajax({
+				url: '/js/concats/json.js',
+				dataType: 'script',
+				cache: 'false',
+			});
+		request.done(m.requestDone);
+		request.fail(p.requestFail);
+	}
+	switch(tag){
+		case '1':
+			p.data();
+			break;
+		default:
+			m.data();
+	}
 };
